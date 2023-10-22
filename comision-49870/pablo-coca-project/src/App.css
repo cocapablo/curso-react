@@ -40,3 +40,10 @@
 .read-the-docs {
   color: #888;
 }
+
+.pabloDiv {
+  background-color: red;
+  color: whitesmoke;
+  font-size: medium;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
