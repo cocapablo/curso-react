@@ -2,6 +2,9 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Home from './components/Home/Home'
+import { Titulo2 } from './components/Titulo/Titulo'
+import { Formulario } from './components/Formulario/Formulario'
 
 const Titulo = () => {
   return (
@@ -11,6 +14,15 @@ const Titulo = () => {
     </div>
   )
 }
+
+
+
+
+
+//Existen 2 tipos de componenetes
+//Funcional y presentacional
+//Presentacional : Solo muestra info
+//Funcional: tiene codigo de comportamiento
 
 function App() {
   const [count, setCount] = useState(0)
@@ -71,6 +83,9 @@ function App() {
     backgroundColor : "yellow" //reemplazo el guión medio de CSS por camelCase
   }
 
+  let sTitulo = "Soy el gran título";
+  let sSubtitulo = "Soy el pequeño subtítulo";
+
   //JSX -> JavaScript + XML
   // Toda etiqueta tiene que tener un cierre (porque es XML)
   return (
@@ -82,6 +97,10 @@ function App() {
       <Titulo />
       <Titulo />
       
+      <Titulo2 titulo={sTitulo} subtitulo={sSubtitulo} />
+
+      <Formulario saludo="Hola soy el formulario de prueba estrella"/>
+
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -108,6 +127,7 @@ function App() {
         <input type="text" name="nombre" id="" placeholder='Ingrese su nombre' ></input>
         <input type="text" name="apellido" id="" placeholder='Ingrese su apellido'/>
       </div>
+      <Home />
     </>
   )
 }
