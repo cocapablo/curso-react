@@ -16,8 +16,39 @@ console.log(task);
 
 export const ItemListContainer = ({greeting}) => {
   const [productos, setProductos] = useState([]);
+  
+  const getFetch = async () => {
+      const resJSON = await fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20");
+      const resultado = await resJSON.json();
+      console.log(result);
+      return result; //result es una Promise
+  }
+
+  /*
+  useEffect(() => 
+    {
+    setTimeout(fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20").then(resultado => resultado.json()).then(pokemones => console.log(pokemones)).catch((errorcito) => console.log("Hubo un error y es este : " + errorcito)), 10000);
+  }, []);
+  */
 
   useEffect(() => {
+    //
+    //Ejemplo de fetch con verbo POST
+    /*
+    fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20", {
+      method : "POST",
+      headers : {
+        "Content-Type": "aplication/json; charset: utf-8",
+        "authentication": "Bearer asdfghertujksmnxxxxx"
+      }
+      body: JSON.stringify({nombre: "Pablo", apellido: "Coca"})
+    }).then(resp => console.log(resp));
+    */
+
+    //Pokemones
+    setTimeout(fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20").then(resultado => resultado.json()).then(pokemones => console.log(pokemones.results)).catch((errorcito) => console.log("Hubo un error y es este : " + errorcito)), 10000);
+
+    //miFetch de Productos
     miFetch().
     then(productosRecibidos => 
       {
@@ -44,16 +75,22 @@ export const ItemListContainer = ({greeting}) => {
   return (
     <div>
         <h2 className="text-center">{greeting}</h2>
-        {productos.map((producto) => <div key={producto.id} className="card w-25 m-3">
-                                      <div className="card-body p-0 my-3">
-                                        <img src={producto.imagen} className="w-100" alt="Imagen del producto"/>
-                                        <h6>{producto.nombre}</h6>
-                                        <p>{producto.precio}</p>
-                                      </div>   
-                                      <div className="card-footer">
-                                        <button className="btn btn-outline-dark w-100">Detalle </button>
-                                      </div>  
-                                    </div>)}
+        <div className="container">
+          <div className="row">
+            
+            {productos.map((producto) => <div key={producto.id} className="col-3 card w-25 m-3">
+                                          <div className="card-body p-0 my-3">
+                                            <img src={producto.imagen} className="w-100" alt="Imagen del producto"/>
+                                            <h6>{producto.nombre}</h6>
+                                            <p>{producto.precio}</p>
+                                          </div>   
+                                          <div className="card-footer">
+                                            <button className="btn btn-outline-dark w-100">Detalle </button>
+                                          </div>  
+                                        </div>)}
+              
+          </div>
+        </div>
     </div>
   )
 }
