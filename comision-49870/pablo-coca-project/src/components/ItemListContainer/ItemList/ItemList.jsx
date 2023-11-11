@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Filter } from "./Filter"
 
 const productFiltered = ({productos, filterState, handleFilterChange}) => (
@@ -22,7 +23,9 @@ const productFiltered = ({productos, filterState, handleFilterChange}) => (
                     <p>{producto.precio}</p>
                 </div>
                 <div className="card-footer">
-                    <button className="btn btn-outline-dark w-100">Detalle </button>
+                    <Link to={`/producto/${producto.id}`}>
+                        <button className="btn btn-outline-dark w-100">Detalle </button>
+                    </Link>
                 </div>
             </div>)
             : 
@@ -35,7 +38,9 @@ const productFiltered = ({productos, filterState, handleFilterChange}) => (
                     <p>{producto.precio}</p>
                 </div>
                 <div className="card-footer">
+                <Link to={`/producto/${producto.id}`}>
                     <button className="btn btn-outline-dark w-100">Detalle </button>
+                </Link>
                 </div>
             </div>)
             }

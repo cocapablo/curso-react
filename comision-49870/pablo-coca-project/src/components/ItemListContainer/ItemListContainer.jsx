@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { miFetch } from "../../helpers/miFetch"
 import { ItemList } from "./ItemList/ItemList";
+import { useParams } from "react-router-dom";
 
 
 
@@ -20,6 +21,10 @@ console.log(task);
 
 export const ItemListContainer = ({ greeting }) => {
   const [productos, setProductos] = useState([]);
+  const {cid} = useParams();
+  let categoria = "";
+
+  cid && (categoria = cid);
 
   const getFetch = async () => {
     const resJSON = await fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20");
@@ -51,13 +56,16 @@ export const ItemListContainer = ({ greeting }) => {
     setTimeout(fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20").then(resultado => resultado.json()).then(pokemones => console.log(pokemones.results)).catch((errorcito) => console.log("Hubo un error y es este : " + errorcito)), 10000);
 
     //miFetch de Productos
-    miFetch().
+    miFetch({categoria: categoria}).
       then(productosRecibidos => {
-        let nuevoProducto = { id: 5, nombre: "Kriptonita", precio: 300, categoria: "Armas", imagen: "https://th.bing.com/th/id/OIP.6rhMk7-uwsLYx7tPP18tbQHaF6?w=216&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" };
+        // Acá se podría agregar un nuevo producto. Por ahora no lo hago
+        /*
+        let nuevoProducto = { id: 6, nombre: "Kriptonita", descripcion: "La piedra verde más temida por los kriptonianos. También combina perfectamente con cualquier adorno en tu hogar", precio: 300, categoria: "Armas", imagen: "https://th.bing.com/th/id/OIP.6rhMk7-uwsLYx7tPP18tbQHaF6?w=216&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" };
 
         if (productosRecibidos.some((prod) => prod.id == nuevoProducto.id) == false) {
           productosRecibidos.push(nuevoProducto);
         }
+        */
 
         //throw new Error("ERROR simulado");
         console.log(productosRecibidos);
@@ -72,7 +80,7 @@ export const ItemListContainer = ({ greeting }) => {
       }).
       //error => console.log("Task RECHAZADO : " + error)).
       catch(err => console.log("ERROR: " + err));
-  }, []);
+  }, [cid]);
   return (
     <div>
       <h2 className="text-center">{greeting}</h2>
