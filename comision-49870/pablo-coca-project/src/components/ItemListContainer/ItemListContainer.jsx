@@ -26,6 +26,8 @@ export const ItemListContainer = ({ greeting }) => {
 
   cid && (categoria = cid);
 
+  //Pruebas con API de pokemones que no van en esta segunda entrega
+  /*
   const getFetch = async () => {
     const resJSON = await fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20");
     const resultado = await resJSON.json();
@@ -53,7 +55,7 @@ export const ItemListContainer = ({ greeting }) => {
     }).then(resp => console.log(resp));
     */
     //Pokemones
-    setTimeout(fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20").then(resultado => resultado.json()).then(pokemones => console.log(pokemones.results)).catch((errorcito) => console.log("Hubo un error y es este : " + errorcito)), 10000);
+    //setTimeout(fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20").then(resultado => resultado.json()).then(pokemones => console.log(pokemones.results)).catch((errorcito) => console.log("Hubo un error y es este : " + errorcito)), 10000);
 
     //miFetch de Productos
     miFetch({categoria: categoria}).

@@ -10,7 +10,11 @@ export const NavBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#">Super Store</Navbar.Brand>
+        <Navbar.Brand >
+          <Link className="btn" to="/">
+            Super Store
+          </Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -26,7 +30,7 @@ export const NavBar = () => {
           <Nav>
             
             <Nav.Link eventKey={2} href="">
-              <Link className="btn" to="/producto">
+              <Link className="btn" to="/">
               <CartWidget />
               </Link>
             </Nav.Link>
