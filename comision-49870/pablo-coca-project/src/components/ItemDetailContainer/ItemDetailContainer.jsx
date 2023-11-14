@@ -2,10 +2,11 @@ import { ItemDetail } from "../ItemDetail/ItemDetail";
 import { useState, useEffect } from "react";
 import { miFetch } from "../../helpers/miFetch";
 import { useParams } from "react-router-dom";
+import { ItemCounter } from '../../components/ItemCounter/ItemCounter';
 
 
 export const ItemDetailContainer = ({idProducto = 0}) => {
-    const [producto, setProducto] = useState([{}]);
+    const [producto, setProducto]= useState([{}]);
     const {pid} = useParams();
 
     let pidProducto = parseInt(pid);
@@ -42,6 +43,13 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
             <div id="productoElegido" className="col-md-12">
                 {producto.id && <ItemDetail producto={producto} ></ItemDetail>}    
             </div> 
+          
+        </div>
+        <div className="row">
+            <div id="itemCounter" className="col-md-12">
+                {producto.id && <ItemCounter initial={1} stock={producto.stock}></ItemCounter>}    
+            </div> 
+          
         </div>
     </div>
     );  
