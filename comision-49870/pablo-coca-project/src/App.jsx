@@ -15,7 +15,9 @@ export const App = () => {
 
   return (
     <Router>
-      <div>
+      <div className='border border-5 border-primary m-3' 
+      //onClick={() => alert("Evento de App")}
+      >
           <NavBar />
           <Routes>
           

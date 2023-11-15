@@ -3,11 +3,18 @@ import { useState, useEffect } from "react";
 import { miFetch } from "../../helpers/miFetch";
 import { useParams } from "react-router-dom";
 import { ItemCounter } from '../../components/ItemCounter/ItemCounter';
+import { Input } from "../Input/Input";
+import { Intercambiabilidad } from "../Intercambiabilidad/Intercambiabilidad";
+import { Gorras } from "../Gorras/Gorras";
 
 
 export const ItemDetailContainer = ({idProducto = 0}) => {
     const [producto, setProducto]= useState([{}]);
     const {pid} = useParams();
+
+    const onAdd = (cantidad) => {
+        console.log("La cantidad seleccionada es: " + cantidad);
+    }
 
     let pidProducto = parseInt(pid);
 
@@ -47,9 +54,27 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
         </div>
         <div className="row">
             <div id="itemCounter" className="col-md-12">
-                {producto.id && <ItemCounter initial={1} stock={producto.stock}></ItemCounter>}    
+                {producto.id && <ItemCounter initial={1} stock={producto.stock} onAdd={onAdd}></ItemCounter>}    
             </div> 
-          
+
+        </div>
+        <div className="row  border border-5 border-warning m-3">
+            <div id="miInput" className="col-md-12">
+                {producto.id && <Input> </Input>}    
+            </div> 
+            
+        </div>
+        <div className="row  border border-5 border-warning m-3">
+            <div id="miInter" className="col-md-12">
+                {producto.id && <Intercambiabilidad />}    
+            </div> 
+            
+        </div>
+        <div className="row  border border-5 border-warning m-3">
+            <div id="miInter" className="col-md-12">
+                {producto.id && <Gorras />}    
+            </div> 
+            
         </div>
     </div>
     );  
