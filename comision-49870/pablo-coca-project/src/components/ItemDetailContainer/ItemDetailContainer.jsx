@@ -14,6 +14,11 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
     if(pidProducto > 0) {
         idProducto = pidProducto;
     }
+
+    const onAdd = (cantidad) => {
+        alert("La cantidad seleccionada es: " + cantidad);
+        console.log("La cantidad seleccionada es: " + cantidad);
+    }
     
     useEffect(() => {
         
@@ -47,12 +52,12 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
         </div>
         <div className="row">
             <div id="itemCounter" className="col-md-12">
-                {producto.id && <ItemCounter initial={1} stock={producto.stock}></ItemCounter>}    
+                {producto.id && <ItemCounter initial={1} stock={producto.stock} onAdd={onAdd}></ItemCounter>}    
             </div> 
           
         </div>
     </div>
-    );  
+    );   
   
 }
 
