@@ -30,7 +30,7 @@ export const NavBar = () => {
           <Nav>
             
             <Nav.Link eventKey={2} href="">
-              <Link className="btn" to="/">
+              <Link className="btn" to="/cart">
               <CartWidget />
               </Link>
             </Nav.Link>

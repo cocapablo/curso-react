@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { Filter } from "./Filter"
 import { Item } from "../Item"
+import { useContext } from "react"
+import { AppContext } from "../../../App"
 
 const productFiltered = ({productos, filterState, handleFilterChange}) => (
     <>
@@ -32,9 +34,15 @@ const productFiltered = ({productos, filterState, handleFilterChange}) => (
     </>
 )
 
+//const AppContext = React.createContext([]);
+
 export const ItemList = ({productos}) => {
+    const {prodGlobales} = useContext(AppContext); //Esto si quiero usar el Context
+
   return (
-    <Filter productos={productos}>
+    //<Filter productos={prodGlobales} > para hacerlo con el context
+    <Filter productos={productos}> 
+    
         {productFiltered}
         
       </Filter>

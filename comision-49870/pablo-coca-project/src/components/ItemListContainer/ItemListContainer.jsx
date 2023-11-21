@@ -25,6 +25,7 @@ export const ItemListContainer = ({ greeting }) => {
   let categoria = "";
 
   cid && (categoria = cid);
+  
 
   //Pruebas con API de pokemones que no van en esta segunda entrega
   /*
@@ -58,6 +59,8 @@ export const ItemListContainer = ({ greeting }) => {
     //setTimeout(fetch("https://pokeapi.co/api/v2/ability/?limit=20&offset=20").then(resultado => resultado.json()).then(pokemones => console.log(pokemones.results)).catch((errorcito) => console.log("Hubo un error y es este : " + errorcito)), 10000);
 
     //miFetch de Productos
+    console.log("Categoria:" + categoria);
+    
     miFetch({categoria: categoria}).
       then(productosRecibidos => {
         // Acá se podría agregar un nuevo producto. Por ahora no lo hago
