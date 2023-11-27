@@ -10,7 +10,8 @@ import { Gorras } from "../Gorras/Gorras";
 
 
 export const ItemDetailContainer = ({idProducto = 0}) => {
-    const [producto, setProducto]= useState([{}]);
+    const [producto, setProducto] = useState([{}]);
+    const [loading, setLoading] = useState(true);
     const {pid} = useParams();
 
 
@@ -40,13 +41,18 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
             setProducto(unicoProducto);
         }).
         //error => console.log("Task RECHAZADO : " + error)).
-        catch(err => console.log("ERROR: " + err));
+        catch(err => console.log("ERROR: " + err)).
+        finally(() => setLoading(false));
     }, []);
     return (
     <div className="container my-3">
         <div className="row">
             <div id="productoElegido" className="col-md-12">
-                {producto.id && <ItemDetail producto={producto} ></ItemDetail>}    
+                {loading ?
+                <h2>Cargando el Producto ...</h2>
+                :
+                <ItemDetail producto={producto} ></ItemDetail>   
+                }
             </div> 
           
         </div>
