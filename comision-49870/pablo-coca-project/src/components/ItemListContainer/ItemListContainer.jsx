@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { miFetch } from "../../helpers/miFetch"
 import { ItemList } from "./ItemList/ItemList";
 import { useParams } from "react-router-dom";
+import {getFirestore, doc, getDoc} from "firebase/firestore";
 
 
 
@@ -105,6 +106,14 @@ export const ItemListContainer = ({ greeting }) => {
       finally(() => setLoading(false));
   }, [cid]);
 
+//   useEffect(() => {
+//     //const dbFirestore = getFirestore();
+//     dbFirestore = getFirestore();
+
+//     const queryDoc = doc(dbFirestore, "productos", "Dh6JOFael4HObY6byasW");
+//     getDoc(queryDoc).then(resultado => setProducto({id: resultado.id}))
+    
+// }, []); //Reemplazar miFetch directamente
 
   const handleLike = () => {
     setLike(!like);

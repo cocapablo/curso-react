@@ -6,6 +6,7 @@ import { ItemCounter } from '../../components/ItemCounter/ItemCounter';
 import { Input } from "../Input/Input";
 import { Intercambiabilidad } from "../Intercambiabilidad/Intercambiabilidad";
 import { Gorras } from "../Gorras/Gorras";
+import {getFirestore, doc, getDoc} from "firebase/firestore";
 
 
 
@@ -15,11 +16,13 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
     const {pid} = useParams();
 
 
-    let pidProducto = parseInt(pid);
+    /* let pidProducto = parseInt(pid);
 
     if(pidProducto > 0) {
         idProducto = pidProducto;
-    }
+    } */
+
+    let pidProducto = pid;
     
     useEffect(() => {
         
@@ -44,6 +47,15 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
         catch(err => console.log("ERROR: " + err)).
         finally(() => setLoading(false));
     }, []);
+
+    /* useEffect(() => {
+        const dbFirestore = getFirestore();
+            
+        const queryDoc = doc(dbFirestore, "productos", "Dh6JOFael4HObY6byasW");
+        getDoc(queryDoc).then(resultado => setProducto({id: resultado.id}))
+        
+    }, []);
+ */
     return (
     <div className="container my-3">
         <div className="row">
