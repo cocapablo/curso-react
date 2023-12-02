@@ -16,13 +16,11 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
     const {pid} = useParams();
 
 
-    /* let pidProducto = parseInt(pid);
+    
+    console.log("pid = ");
+    console.log(pid);
 
-    if(pidProducto > 0) {
-        idProducto = pidProducto;
-    } */
-
-    let pidProducto = pid;
+    pid && (idProducto = pid);
     
     useEffect(() => {
         

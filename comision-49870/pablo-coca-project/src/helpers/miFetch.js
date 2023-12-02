@@ -80,6 +80,7 @@ function fetchFirebase({idProducto = 0, categoria=""}) {
     let productosLeidos; 
 
     //acciones
+    console.log("Producto elegido: " + idProducto);
     const dbFirestore = getFirestore(); //Conecta con firestore
     //categoria = "superarmas";
     //idProducto = "eAdvA8cWzXWICbqDInrB";
@@ -107,7 +108,9 @@ function fetchFirebase({idProducto = 0, categoria=""}) {
       else {
         //Devuelvo todos los productos
         //Trae todos los productos
+        
         const queryCollection = collection(dbFirestore,"productos");
+        console.log("Estoy devolviendo todos los productos " + idProducto);
 
         getDocs(queryCollection)
         .then(resultado => res(productosLeidos = resultado.docs.map(producto => ({id : producto.id, ...producto.data()}))))
@@ -118,7 +121,7 @@ function fetchFirebase({idProducto = 0, categoria=""}) {
     else {
       //Retorna un array con solo el Producto cuyo id = idProducto
       const queryDoc = doc(dbFirestore, "productos", idProducto);  //Apunto aun doc de firestore
-
+      console.log("Producto elegido: " + idProducto);
   
       getDoc(queryDoc)
       .then(resultado => {

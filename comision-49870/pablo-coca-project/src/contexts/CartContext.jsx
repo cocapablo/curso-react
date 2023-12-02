@@ -13,10 +13,22 @@ export const CartContextProvider = ({children}) => {
     const [cartList, setCartList] = useState([]);
 
     const agregarProducto = (nuevoProducto) => {
-        setCartList([
-            ...cartList,
-            nuevoProducto
-        ])
+        let viejoProducto;
+        //Me fijo si el producto ya estaba en CartList
+        viejoProducto = cartList.find(producto => producto.id === nuevoProducto.id);
+
+        if (viejoProducto) {
+            //El producto ya existía . Solo sumo la cantidad
+            viejoProducto.cantidad += nuevoProducto.cantidad;
+            setCartList(cartList);
+        } 
+        else {
+            //Producto nuevo. Lo agrego al carrito
+            setCartList([
+                ...cartList,
+                nuevoProducto
+            ])
+        }
     }
 
     const vaciarCarrito = () => {
@@ -28,11 +40,21 @@ export const CartContextProvider = ({children}) => {
     //Precio total de productos
     //Eliminar un producto por Item
 
+    const precioTotal = () => {
+        let valorInicial = 0;
+        let total = 0;
+
+        total = cartList.reduce((acumulador, producto) => acumulador += (producto.precio * producto.cantidad), valorInicial);
+
+        return total;
+    }   
+
     return (
         <CartContext.Provider value={{
             cartList,
             agregarProducto,
-            vaciarCarrito
+            vaciarCarrito,
+            precioTotal
         }}>
             {children}
         </CartContext.Provider>
