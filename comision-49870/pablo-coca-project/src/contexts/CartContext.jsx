@@ -35,6 +35,10 @@ export const CartContextProvider = ({children}) => {
         setCartList([]);
     }
 
+    const removerProducto = (idProducto) => {
+        setCartList(cartList.filter((producto) => producto.id !== idProducto));
+    }
+
     //Faltan estas funciones
     //Cantidad total de productos
     //Precio total de productos
@@ -49,12 +53,23 @@ export const CartContextProvider = ({children}) => {
         return total;
     }   
 
+    const cantidadProductos = () => {
+        let valorInicial = 0;
+        let total = 0;
+
+        total = cartList.reduce((acumulador, producto) => acumulador += producto.cantidad, valorInicial);
+
+        return total;   
+    } 
+
     return (
         <CartContext.Provider value={{
             cartList,
             agregarProducto,
             vaciarCarrito,
-            precioTotal
+            precioTotal,
+            cantidadProductos,
+            removerProducto
         }}>
             {children}
         </CartContext.Provider>

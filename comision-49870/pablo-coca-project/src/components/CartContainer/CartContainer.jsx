@@ -1,12 +1,14 @@
 import { addDoc, collection, doc, getFirestore, updateDoc, writeBatch } from "firebase/firestore";
 import { useCartContext } from "../../contexts/CartContext"
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 
 export const CartContainer = () => {
-    const [formData, setFormData]= useState({nombre: " ", telefono: " ", email: " "});
-    const {cartList, vaciarCarrito, precioTotal} = useCartContext();
+    const [formData, setFormData]= useState({nombre: " ", telefono: " ", email: " ", repetirEmail: " "});
+    const {cartList, vaciarCarrito, precioTotal, removerProducto} = useCartContext();
+    const [idCompra, setIDCompra] = useState("");
 
     const handleOrden = (evt) => {
       evt.preventDefault();
@@ -30,8 +32,9 @@ export const CartContainer = () => {
 
       //Agregar validaciones acá
       addDoc(ordenCollection, orden)
-      .then(respuesta => console.log(respuesta))
+      .then(respuesta => setIDCompra(respuesta.id))
       .catch(err => console.log("Error : " + err))
+      .finally(() => vaciarCarrito());
       ;
 
       //Update
@@ -75,16 +78,28 @@ export const CartContainer = () => {
 
   return (
     <div>
+        {idCompra !== ""
+          &&
+          <label className="form-control m-4 w-50 bg-warning text-blue fw-bold">La Orden de Compra es: {idCompra}</label> 
+        }
+
         {cartList.map((producto) => <div key={producto.id} className="row m-2">
                                         <img className="w-25 col-2" src={producto.imagen} />
                                         <p className="col-2">Cantidad: {producto.cantidad} - Precio: ${producto.precio} - Subtotal: ${producto.precio * producto.cantidad}
-                                            <button className="btn btn-danger col-2"> X </button>
+                                            <button className="btn btn-danger col-2" onClick={() => removerProducto(producto.id)}> X </button>
                                         </p>
                                         
                                         
                                     </div>
 
         )}
+
+        {precioTotal() > 0 
+        ?
+        <>
+        <label className="form-control m-4 w-50 bg-primary text-white">Precio Total: ${precioTotal()}</label> 
+
+        
         <button className="btn btn-danger m-4" onClick={vaciarCarrito}>Vaciar Carrito</button>
         <form className="form-control mx-4 w-50 m-4" onSubmit={handleOrden} >
           <label>Nombre</label>
@@ -113,9 +128,21 @@ export const CartContainer = () => {
             value={formData.email}
             onChange={handleOnChange}
           ></input>
+          <label>Repetir eMail</label>
+          <input 
+            type="text"
+            name="repetirEmail"
+            className="form-control"
+            value={formData.repetirEmail}
+            onChange={handleOnChange}
+          ></input>
           <br />
           <button className="btn btn-danger m-4" >Terminar Compra</button>
         </form>
+        </>
+        :
+        <label className="form-control m-4 w-50 bg-primary text-white">El carrito está vacío. Los superhéroes están tristes e indefensos   - <Link className="text-white fw-bold" to={"/"}> Ir a elegir Productos</Link></label> 
+    }
     </div>
   )
 }

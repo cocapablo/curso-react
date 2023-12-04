@@ -1,8 +1,14 @@
+import { useCartContext } from '../../contexts/CartContext';
 import './CartWidget.css' 
 
-export const CartWidget = () => (
-  <div>
-    <span className="contador-carrito">6</span>
-  <img src="supercarrito-icon.jpg" alt="Imagen del super carrito de compras" />
-  </div>
-)
+export const CartWidget = () => {
+  const {cantidadProductos} = useCartContext();
+
+  return (
+    <div>
+      {cantidadProductos() > 0 && <span className="contador-carrito">{cantidadProductos()}</span>}
+      
+    <img src="supercarrito-icon.jpg" alt="Imagen del super carrito de compras" />
+    </div>
+  )
+  }

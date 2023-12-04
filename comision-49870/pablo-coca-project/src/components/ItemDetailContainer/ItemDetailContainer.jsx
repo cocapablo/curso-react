@@ -7,6 +7,7 @@ import { Input } from "../Input/Input";
 import { Intercambiabilidad } from "../Intercambiabilidad/Intercambiabilidad";
 import { Gorras } from "../Gorras/Gorras";
 import {getFirestore, doc, getDoc} from "firebase/firestore";
+import { Loading } from "../Loading/Loading";
 
 
 
@@ -59,7 +60,7 @@ export const ItemDetailContainer = ({idProducto = 0}) => {
         <div className="row">
             <div id="productoElegido" className="col-md-12">
                 {loading ?
-                <h2>Cargando el Producto ...</h2>
+                <Loading />
                 :
                 <ItemDetail producto={producto} ></ItemDetail>   
                 }

@@ -4,6 +4,7 @@ import { miFetch } from "../../helpers/miFetch"
 import { ItemList } from "./ItemList/ItemList";
 import { useParams } from "react-router-dom";
 import {getFirestore, doc, getDoc} from "firebase/firestore";
+import { Loading } from "../Loading/Loading";
 
 
 
@@ -20,19 +21,7 @@ const task = new Promise((resuelto, rechazado) => {  //Estados: 1 - Pendiente - 
 console.log(task);
 */
 
-export const Loading = () => {
-  useEffect(() => {
-    //Código
-    return () =>
-      console.log("Desmontando Loading...");
-    
-    }
-  );
 
-  return(
-    <h2>Cargando ...</h2> 
-  );
-}
 
 export const ItemListContainer = ({ greeting }) => {
   const [productos, setProductos] = useState([]);

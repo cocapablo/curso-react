@@ -33,9 +33,10 @@ export const App = () => {
       <div className='border border-5 border-primary m-3' 
       //onClick={() => alert("Evento de App")}
       >
-          <NavBar />
+          
           
             <CartContextProvider>
+            <NavBar />
               <Routes>
                 
                   <Route path='/' element= {<ItemListContainer greeting="Bienvenidos Superhéroes del Universo" /> } ></Route>
