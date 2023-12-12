@@ -1,8 +1,37 @@
-# React + Vite
+# Super Store
+## Aplicación de eCommerce para Super Héroes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta aplicación es una tienda online para el super héroe de hoy.
 
-Currently, two official plugins are available:
+Diseñada para que nuestros héroes puedan comprar todo lo que necesiten desde la comodidad de su guarida y no mal gasten tiempo yendo a tiendas, en lugar de rescatar a gente de bien de los villanos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Versión Online
+DEMO: https://pablo-coca-react-project.netlify.app/
+
+
+## Librerías
+
+| Librería | Uso |
+| ------ | ------ |
+| bootstrap 5.3.2 | La utilizo por sus hojas de estilos CSS |
+| firebase 10.7.0 | La utilizo como Base de Datos |
+| react 18.2.0 | Librería base de React |
+| react-bootstrap 2.9.1 | La versión con componenetes React de bootstrap |
+| react-dom 18.2.0 | El dom de React |
+| react-router-dom 6.18.0 | Para realizar enrutamiento en React|
+
+## Autor
+Pablo Coca
+- Instagram: https://instagram.com/cocapablo
+- YouTube: https://youtube.com/cocapablo
+- Facebook: https://facebook.com/cocapablo
+- Twitch: https://twitch.tv/cocapablook
+- LinkedIn : https://www.linkedin.com/in/cocapablo/
+
+## Agradecimientos
+
+> Dedicada a la memoria de Iron Man
+> quien dió su vida al luchar 
+> contra Thanos en Avengers End Game
+
+Iron Man (te recordaremos siempre así) : https://www.wallpaperflare.com/static/264/707/824/iron-man-the-avengers-robert-downey-junior-tony-wallpaper.jpg

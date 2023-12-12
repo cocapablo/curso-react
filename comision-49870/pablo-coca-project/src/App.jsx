@@ -63,3 +63,15 @@ export const App = () => {
 
 
 export default App
+
+//Depuracion de codigo
+// optimizar nuestro código para la entrega final
+    // 1- no repetir cód.
+    // 2- no mezclar idiomas en el cód. 
+    // 3- no al cód comentado. 
+    // 4- eliminar todos los console.log (menos los de los errores)
+    // 5- Eliminar todo lo que no necesitemos -> mock el fetch - promises fuinciones que no usemos
+    // 6- identar bien el cód. 
+    // 7- no debe haber variables o estados declarados nunca usados
+    // 8- Eliminar importaciones declaradas nunca usadas
+    // 9- diseño modular- cada función - en sus archivos bien separadas las responsabilidades

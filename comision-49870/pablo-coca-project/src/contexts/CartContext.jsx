@@ -20,7 +20,7 @@ export const CartContextProvider = ({children}) => {
         if (viejoProducto) {
             //El producto ya existía . Solo sumo la cantidad
             viejoProducto.cantidad += nuevoProducto.cantidad;
-            setCartList(cartList);
+            setCartList([...cartList]);
         } 
         else {
             //Producto nuevo. Lo agrego al carrito

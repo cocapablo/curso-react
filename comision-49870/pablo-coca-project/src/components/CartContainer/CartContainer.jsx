@@ -5,13 +5,60 @@ import { Link } from "react-router-dom";
 
 
 
+
 export const CartContainer = () => {
     const [formData, setFormData]= useState({nombre: " ", telefono: " ", email: " ", repetirEmail: " "});
+    const [validacionDatosFormulario, setValidacionDatosFormulario] = useState({datosOk: true, mensajeError: ""});
     const {cartList, vaciarCarrito, precioTotal, removerProducto} = useCartContext();
     const [idCompra, setIDCompra] = useState("");
 
+    const validarDatosformulario = () => {
+      let datosValidados = {datosOk: true, mensajeError: ""};
+    
+      //Nombre
+      if (formData.nombre.trim().length === 0) {
+        datosValidados.datosOk = false;
+        datosValidados.mensajeError = "Debe ingresar un Nombre";
+        return datosValidados;
+      }
+    
+      //Telefono
+      if (formData.telefono.trim().length === 0) {
+        datosValidados.datosOk = false;
+        datosValidados.mensajeError = "Debe ingresar un Telefono";
+        return datosValidados;
+      }
+    
+      //eMail
+      if (formData.email.trim().length === 0) {
+        datosValidados.datosOk = false;
+        datosValidados.mensajeError = "Debe ingresar un eMail";
+        return datosValidados;
+      }
+    
+      //Repetir eMail
+      if (formData.repetirEmail !== formData.email) {
+        datosValidados.datosOk = false;
+        datosValidados.mensajeError = "Ingresó un eMail diferente en Repetir eMail al ingresado en eMail";
+        return datosValidados;
+      }
+    
+    
+      return datosValidados;
+    }
+
     const handleOrden = (evt) => {
       evt.preventDefault();
+
+      //Valido los datos
+      let datosValidados = validarDatosformulario();
+
+      console.log(datosValidados);
+
+      if (datosValidados.datosOk === false) {
+        setValidacionDatosFormulario(datosValidados);
+        return;
+      }
 
       const orden = {};
 
@@ -83,16 +130,19 @@ export const CartContainer = () => {
           <label className="form-control m-4 w-50 bg-warning text-blue fw-bold">La Orden de Compra es: {idCompra}</label> 
         }
 
+        <div className="container">
         {cartList.map((producto) => <div key={producto.id} className="row m-2">
-                                        <img className="w-25 col-2" src={producto.imagen} />
-                                        <p className="col-2">Cantidad: {producto.cantidad} - Precio: ${producto.precio} - Subtotal: ${producto.precio * producto.cantidad}
-                                            <button className="btn btn-danger col-2" onClick={() => removerProducto(producto.id)}> X </button>
+                                        <img className="col-3" src={producto.imagen} />
+                                        <p className="col-sm">Cantidad: {producto.cantidad} - Precio: ${producto.precio} - Subtotal: ${producto.precio * producto.cantidad}
+                                            <button className="btn btn-danger col-sm m-2" onClick={() => removerProducto(producto.id)}> X </button>
                                         </p>
                                         
                                         
                                     </div>
 
         )}
+        </div>
+        
 
         {precioTotal() > 0 
         ?
@@ -102,6 +152,11 @@ export const CartContainer = () => {
         
         <button className="btn btn-danger m-4" onClick={vaciarCarrito}>Vaciar Carrito</button>
         <form className="form-control mx-4 w-50 m-4" onSubmit={handleOrden} >
+          {validacionDatosFormulario.datosOk === false &&
+          <label className="form-control bg-warning text-black fw-bold">{validacionDatosFormulario.mensajeError}</label> 
+          }
+          
+          <br />
           <label>Nombre</label>
           <input 
             type="text"
@@ -128,6 +183,7 @@ export const CartContainer = () => {
             value={formData.email}
             onChange={handleOnChange}
           ></input>
+          <br />
           <label>Repetir eMail</label>
           <input 
             type="text"
