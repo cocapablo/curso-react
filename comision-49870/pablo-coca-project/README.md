@@ -16,7 +16,7 @@ DEMO: https://pablo-coca-react-project.netlify.app/
 | bootstrap 5.3.2 | La utilizo por sus hojas de estilos CSS |
 | firebase 10.7.0 | La utilizo como Base de Datos |
 | react 18.2.0 | Librería base de React |
-| react-bootstrap 2.9.1 | La versión con componenetes React de bootstrap |
+| react-bootstrap 2.9.1 | La versión con componentes React de bootstrap |
 | react-dom 18.2.0 | El dom de React |
 | react-router-dom 6.18.0 | Para realizar enrutamiento en React|
 
