@@ -3,7 +3,7 @@
 
 Esta aplicación es una tienda online para el super héroe de hoy.
 
-Diseñada para que nuestros héroes puedan comprar todo lo que necesiten desde la comodidad de su guarida y no mal gasten tiempo yendo a tiendas, en lugar de rescatar a gente de bien de los villanos
+Diseñada para que nuestros héroes puedan comprar todo lo que necesiten desde la comodidad de su guarida y no malgasten tiempo yendo a tiendas, en lugar de rescatar a gente de bien de los villanos
 
 ## Versión Online
 DEMO: https://pablo-coca-react-project.netlify.app/
