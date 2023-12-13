@@ -11,6 +11,9 @@ export const ItemDetail = ({producto}) => {
 
     const {agregarProducto} = useCartContext();
 
+    console.log("Producto:");
+    console.log(producto);
+
     const onAdd = (cantidad) => {
         console.log("La cantidad seleccionada es: " + cantidad);
         agregarProducto({
@@ -23,6 +26,8 @@ export const ItemDetail = ({producto}) => {
   return (
     <>
     {/* <TextComponent usuario={true} >  */}
+    {producto.nombre 
+    ? 
     <div className="card mb-12" style={{maxWidth: "1200px"}}>
          
          <div className="row g-0">
@@ -53,13 +58,13 @@ export const ItemDetail = ({producto}) => {
             </div> 
         
         </div>
-        
-        
-        
-
-        
-
+     
     </div>
+    :
+    <label className="form-control m-4 w-50 bg-danger text-white">El producto no se encuentra en la Base de Datos   - <Link className="text-white fw-bold" to={"/"}> Ir a elegir Productos</Link></label> 
+    
+    }
+
     {/* </TextComponent>   
 
     <TextComponent2 usuario="user"> </TextComponent2>

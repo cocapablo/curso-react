@@ -126,6 +126,7 @@ function fetchFirebase({idProducto = 0, categoria=""}) {
       getDoc(queryDoc)
       .then(resultado => {
         producto = {id : resultado.id, ...resultado.data()};
+        console.log("Encontré el producto");
         producto.id && console.log(producto); 
         productosLeidos = [producto];
         res(productosLeidos);  
