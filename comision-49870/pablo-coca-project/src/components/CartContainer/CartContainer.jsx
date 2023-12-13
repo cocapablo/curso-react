@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getFirestore, updateDoc, writeBatch } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useCartContext } from "../../contexts/CartContext"
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -53,8 +53,7 @@ export const CartContainer = () => {
       //Valido los datos
       let datosValidados = validarDatosformulario();
 
-      console.log(datosValidados);
-
+      
       if (datosValidados.datosOk === false) {
         setValidacionDatosFormulario(datosValidados);
         return;
@@ -68,52 +67,19 @@ export const CartContainer = () => {
 
       orden.total = precioTotal();
 
-      console.log("Orden: ");
-      console.log(orden);
-
       //Guardo en Firestore
       //Create
       const db = getFirestore();
 
       const ordenCollection = collection(db, "ordenes");
 
-      //Agregar validaciones acá
       addDoc(ordenCollection, orden)
       .then(respuesta => setIDCompra(respuesta.id))
       .catch(err => console.log("Error : " + err))
       .finally(() => vaciarCarrito());
       ;
 
-      //Update
-      /* const db = getFirestore();
-
-      const documento = doc(db, "productos", "Dh6JOFael4HObY6byasW");
-
-      updateDoc(documento, {stock: 666})
-      .then(() => console.log("terminó la actaulización"))
-      .catch(err => console.log("Error: " + err)); */
-
-      //Escritura por lotes
-      /* const db= getFirestore();
-
-      const batch = writeBatch(db);
-
-      const documento1 = doc(db, "productos", "Dh6JOFael4HObY6byasW"); //Baticapa
-      const documento2 = doc(db, "productos", "rAH48nc4RFX9Or9lMJwH"); //baticueva
-
-      batch.update(documento1, {stock: 25031972})
-      batch.update(documento2, {stock: 25031972})
-
-      batch.commit(); */
-
-      //borrado logico
-    //   const db = getFirestore();
-
-    //   const documento = doc(db, "productos", "Dh6JOFael4HObY6byasW");
-
-    //   updateDoc(documento, {estaActivo: false})
-    //   .then(() => console.log("terminó la actaulización"))
-    //   .catch(err => console.log("Error: " + err));
+      
     }
 
     const handleOnChange = (evt) => {

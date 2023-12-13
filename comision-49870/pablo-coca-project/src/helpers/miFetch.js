@@ -1,4 +1,4 @@
-import {getFirestore, doc, getDoc, collection, getDocs, query, where, limit, orderBy} from "firebase/firestore";
+import {getFirestore, doc, getDoc, collection, getDocs, query, where} from "firebase/firestore";
 
 let productos = [
   { id: "1", nombre: "Capa roja", descripcion: "Fantástica capa roja con la cual no pasarás desapercibido nunca al volar por los cielos", precio: 1000, stock: 1000, categoria: "capas", imagen: "https://http2.mlstatic.com/fantasia-capa-do-super-heroi-superman-tamanho-unico-infantil-D_NQ_NP_633770-MLB27115950667_042018-F.jpg" },
@@ -9,39 +9,16 @@ let productos = [
   { id: "6", nombre: "Kriptonita", descripcion: "La piedra verde más temida por los kriptonianos. También combina perfectamente con cualquier adorno en tu hogar", precio: 300, stock: 250, categoria: "superarmas", imagen: "https://th.bing.com/th/id/OIP.6rhMk7-uwsLYx7tPP18tbQHaF6?w=216&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" }
 ];
 
-/* export const miFetch = ({idProducto = 0, categoria=""}) => {
-  return new Promise((res, rej) => {
-    //acciones
-    if (productos.length > 0) {
-      if (idProducto === 0) {
-        //Me fijo si hay alguna categoria especificada
-        if (categoria.length > 0) {
-          let productosElegidos;
 
-          productosElegidos = productos.filter((producto) => producto.categoria === categoria);
-          setTimeout(() => res(productosElegidos), 2000);    
-        }
-        else {
-          //Devuelvo todos los productos
-          setTimeout(() => res(productos), 2000); //resuelto("Acá te devuelvo lo que me prestaste"); //el parámetro es el resultado del estado Completado (2)
-        }
-      }
-      else {
-        //Retorna un array con solo el Producto cuyo id = idProducto
-        let productosElegidos;
 
-        productosElegidos = productos.filter((producto) => producto.id == idProducto);
-        setTimeout(() => res(productosElegidos), 2000);
-      }
-    } else {
-      setTimeout(() => rej("No se encontraron productos"), 5000);
-    }
-
-  });
-}; */
-
-//export const miFetch = fetchMock;
 export const miFetch = fetchFirebase;
+
+/*
+NOTA: miFetch es una variable que apunta al fetch que se va a utilizar para realizar la consulta
+En este proyecto apunta a fetchFirebase, porque la base de datos está en esa plataforma
+fetchMock es la función que devuleve los datos desde un Mock
+Así se podrían construir funciones fetch que apunten a diferentes origenes de datos (APIs, otras Bases de Datos, etc)
+*/
 
 function fetchMock({idProducto = 0, categoria=""}) {
   return new Promise((res, rej) => {
@@ -80,54 +57,50 @@ function fetchFirebase({idProducto = 0, categoria=""}) {
     let productosLeidos; 
 
     //acciones
-    console.log("Producto elegido: " + idProducto);
+    
     const dbFirestore = getFirestore(); //Conecta con firestore
-    //categoria = "superarmas";
-    //idProducto = "eAdvA8cWzXWICbqDInrB";
+    
 
     if (idProducto === 0) {
       //Me fijo si hay alguna categoria especificada
       if (categoria.length > 0) {
         //Filtro por categoría
         const queryCollection = collection(dbFirestore,"productos");
-        console.log("Categoria elegida: " + categoria);
-
+        
         const queryFilter = query(queryCollection, where("categoria", "==", categoria));
               
         getDocs(queryFilter)
         .then(resultado => {
           productosLeidos = resultado.docs.map(producto => ({id : producto.id, ...producto.data()}));
-          console.log("Productos filtrados");
-          console.log(productosLeidos);
+          
           res(productosLeidos);
         }
         )
         .catch(err => rej(err));
-        //setTimeout(() => res(productosElegidos), 2000);    
+           
       }
       else {
         //Devuelvo todos los productos
         //Trae todos los productos
         
         const queryCollection = collection(dbFirestore,"productos");
-        console.log("Estoy devolviendo todos los productos " + idProducto);
+        
 
         getDocs(queryCollection)
         .then(resultado => res(productosLeidos = resultado.docs.map(producto => ({id : producto.id, ...producto.data()}))))
         .catch(err => rej(err));
-        //setTimeout(() => res(productos), 2000); //resuelto("Acá te devuelvo lo que me prestaste"); //el parámetro es el resultado del estado Completado (2)
+        
       }
     }
     else {
       //Retorna un array con solo el Producto cuyo id = idProducto
       const queryDoc = doc(dbFirestore, "productos", idProducto);  //Apunto aun doc de firestore
-      console.log("Producto elegido: " + idProducto);
+      
   
       getDoc(queryDoc)
       .then(resultado => {
         producto = {id : resultado.id, ...resultado.data()};
-        console.log("Encontré el producto");
-        producto.id && console.log(producto); 
+        
         productosLeidos = [producto];
         res(productosLeidos);  
       }
@@ -143,7 +116,7 @@ function fetchFirebase({idProducto = 0, categoria=""}) {
       getDocs(queryFilter)
       .then(resultado => res(productosLeidos = resultado.docs.map(producto => ({id : producto.id, ...producto.data()}))))
       .catch(err => rej(err));
-      //setTimeout(() => res(productosElegidos), 2000);
+      
     }
     
 

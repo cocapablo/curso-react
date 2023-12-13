@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useCartContext } from "../../contexts/CartContext"
 import { ItemCounter } from "../ItemCounter/ItemCounter"
-import { TextComponent, TextComponent2, TextComponent3, TextComponent4, TextComponent5, TextComponent6, TextComponent7 } from "../TextComponent/ComponentesEjemploCondicionales";
 import { Link } from "react-router-dom";
 
 
@@ -65,14 +64,6 @@ export const ItemDetail = ({producto}) => {
     
     }
 
-    {/* </TextComponent>   
-
-    <TextComponent2 usuario="user"> </TextComponent2>
-    <TextComponent3 /> */}
-    {/* <TextComponent4 stock={producto.stock}/>
-    <TextComponent5 stock={producto.stock}/>
-    <TextComponent6 stock={producto.stock} otraClase="mt-5"/>
-    <TextComponent7 condicion={true}/> */}
     </>
   )
 }

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import { Filter } from "./Filter"
 import { Item } from "../Item"
-import { memo, useContext } from "react"
-import { AppContext } from "../../../App"
+import { memo } from "react"
+
 
 const productFiltered = ({productos, filterState, handleFilterChange}) => (
     <>
@@ -34,21 +34,20 @@ const productFiltered = ({productos, filterState, handleFilterChange}) => (
     </>
 )
 
-//const AppContext = React.createContext([]);
-//memo(Componente) o memo(componente, funcionComparadora) Estos son los dos usos posibles
+
 
 export const ItemList = memo( ({productos}) => {
-    const {prodGlobales} = useContext(AppContext); //Esto si quiero usar el Context
+    
 
   return (
-    //<Filter productos={prodGlobales} > para hacerlo con el context
+    
     <Filter productos={productos}> 
     
         {productFiltered}
         
       </Filter>
   )
-}, (propsViejas, propsNuevas) => {console.log(propsViejas, propsNuevas);
+}, (propsViejas, propsNuevas) => {
     propsViejas.productos.lenght !== propsNuevas.productos.lenght}
 )
 
